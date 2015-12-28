@@ -1,0 +1,604 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/*
+ * RecapScreen.java
+ *
+ * Created on Feb 28, 2012, 11:34:36 PM
+ */
+package factory.ranger.view;
+
+import factory.ranger.model.Factory;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLayeredPane;
+import javax.swing.JScrollPane;
+
+/**
+ *
+ * @author axioo
+ */
+public class RecapScreen extends javax.swing.JPanel {
+
+    private static RecapScreen recapscreen = new RecapScreen();
+    
+    public static RecapScreen getSingleton(){
+        return recapscreen;
+    }
+    
+    MachinePanel mpanel;
+    VendorPanel vpanel;
+    ProductPanel ppanel;
+    JScrollPane content;
+    /** Creates new form RecapScreen */
+    public RecapScreen() {
+        initComponents();
+    }
+
+    public void displayRecap(int mode) throws IOException{
+        recapPanel.setVisible(false);
+        factoryPanel.setVisible(false);
+        machinePanel.setVisible(false);
+        vendorPanel.setVisible(false);
+        productPanel.setVisible(false);
+        
+        switch (mode){
+            case 1 :
+                recapPanel.setVisible(true);
+                input_txt.setText(SelectScreen.getSingleton().path);
+                if(SelectScreen.getSingleton().mode == 1){
+                    algorithm_txt.setText("Breadth First Search (BFS)");
+                } else if(SelectScreen.getSingleton().mode == 2){
+                    algorithm_txt.setText("Depth First Search (DFS)");
+                } else if(SelectScreen.getSingleton().mode == 3){
+                    algorithm_txt.setText("A* Algorithm");
+                }
+                //FormPanel.state = 2;
+                break;
+            case 2 :
+                factoryPanel.setVisible(true);
+                budget_txt.setText("Rp "+Factory.getSingleton().get$());
+                hour_txt.setText(Factory.getSingleton().getH()+" hours");
+                machines_txt.setText(Factory.getSingleton().getM()+" machines");
+                capacity_txt.setText(Factory.getSingleton().getN()+" machines/day");
+                transport_txt.setText(Factory.getSingleton().getY()+" machines/truck");
+                //FormPanel.state = 3;
+                break;
+            case 3 :
+                machinePanel.setVisible(true);
+                showMachine();
+                //FormPanel.state = 4;
+                break;
+            case 4 :
+                vendorPanel.setVisible(true);
+                showVendor();
+                //FormPanel.state = 5;
+                break;
+            case 5 :
+                productPanel.setVisible(true);
+                showProduct();
+                //FormPanel.state = 6;
+                break;
+            default :
+                
+                break;
+        }
+        this.setVisible(true);
+        
+    }
+    
+    public void showMachine() throws IOException{
+        machinePanel.removeAll();
+        mpanel = new  MachinePanel(); 
+        content = new JScrollPane();
+        content.setOpaque(false);
+        content.getVerticalScrollBar().setBlockIncrement(100);
+        content = mpanel.getContent();
+        content.setBounds(207,7,565,355);
+        content.setVisible(true);
+        machinePanel.add(content);
+        machinePanel.add(machine_lbl1);
+        machinePanel.add(machine_btn1);
+        this.setVisible(true);
+    }
+    
+    public void showVendor() throws IOException{
+        vendorPanel.removeAll();
+        vpanel = new  VendorPanel(); 
+        content = new JScrollPane();
+        content.setOpaque(false);
+        content.getVerticalScrollBar().setBlockIncrement(100);
+        content = vpanel.getContent();
+        content.setBounds(207,7,565,355);
+        content.setVisible(true);
+        vendorPanel.add(vendor_lbl1);
+        vendorPanel.add(vendor_btn1);
+        vendorPanel.add(content);
+        this.setVisible(true);
+    }
+    
+    public void showProduct() throws IOException{
+        productPanel.removeAll();
+        ppanel = new  ProductPanel(); 
+        content = new JScrollPane();
+        content.setOpaque(false);
+        content.getVerticalScrollBar().setBlockIncrement(100);
+        content = ppanel.getContent();
+        content.setBounds(207,7,565,355);
+        content.setVisible(true);
+        productPanel.add(content);
+        productPanel.add(product_lbl1);
+        productPanel.add(product_btn1);
+        this.setVisible(true);
+    }
+    
+    public void hideRecap(){
+        recapPanel.setVisible(true);
+        factoryPanel.setVisible(true);
+        machinePanel.setVisible(true);
+        vendorPanel.setVisible(true);
+        productPanel.setVisible(true);
+        this.setVisible(false);
+    }
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        productPanel = new javax.swing.JLayeredPane();
+        product_lbl1 = new javax.swing.JLabel();
+        product_btn1 = new javax.swing.JLabel();
+        vendorPanel = new javax.swing.JLayeredPane();
+        vendor_lbl1 = new javax.swing.JLabel();
+        vendor_btn1 = new javax.swing.JLabel();
+        machinePanel = new javax.swing.JLayeredPane();
+        machine_lbl1 = new javax.swing.JLabel();
+        machine_btn1 = new javax.swing.JLabel();
+        factoryPanel = new javax.swing.JLayeredPane();
+        factory_lbl1 = new javax.swing.JLabel();
+        factory_btn1 = new javax.swing.JLabel();
+        budget_lbl = new javax.swing.JLabel();
+        budget_txt = new javax.swing.JTextField();
+        hour_lbl = new javax.swing.JLabel();
+        hour_txt = new javax.swing.JTextField();
+        machines_lbl = new javax.swing.JLabel();
+        machines_txt = new javax.swing.JTextField();
+        capacity_lbl = new javax.swing.JLabel();
+        capacity_txt = new javax.swing.JTextField();
+        transport_lbl = new javax.swing.JLabel();
+        transport_txt = new javax.swing.JTextField();
+        recapPanel = new javax.swing.JLayeredPane();
+        recap_lbl1 = new javax.swing.JLabel();
+        algorithm_lbl = new javax.swing.JLabel();
+        input_lbl = new javax.swing.JLabel();
+        algorithm_txt = new javax.swing.JTextField();
+        input_txt = new javax.swing.JTextField();
+        recap_btn2 = new javax.swing.JLabel();
+        product_lbl = new javax.swing.JLabel();
+        vendor_lbl = new javax.swing.JLabel();
+        machine_lbl = new javax.swing.JLabel();
+        factory_lbl = new javax.swing.JLabel();
+        recap_lbl = new javax.swing.JLabel();
+        product_btn = new javax.swing.JLabel();
+        vendor_btn = new javax.swing.JLabel();
+        machine_btn = new javax.swing.JLabel();
+        factory_btn = new javax.swing.JLabel();
+        recap_btn = new javax.swing.JLabel();
+        back_btn = new javax.swing.JLabel();
+        simulation_btn = new javax.swing.JLabel();
+        dialogbox = new javax.swing.JLabel();
+        header = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
+        product_lbl1.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        product_lbl1.setForeground(new java.awt.Color(229, 224, 181));
+        product_lbl1.setText("  PRODUCTS DETAILS");
+        product_lbl1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        product_lbl1.setBounds(20, 290, 180, 35);
+        productPanel.add(product_lbl1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        product_btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/menu-left menu selected-x20y170.png"))); // NOI18N
+        product_btn1.setText("jLabel18");
+        product_btn1.setBounds(20, 280, 180, 55);
+        productPanel.add(product_btn1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        productPanel.setBounds(0, 150, 800, 370);
+        jLayeredPane1.add(productPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        vendor_lbl1.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        vendor_lbl1.setForeground(new java.awt.Color(229, 224, 181));
+        vendor_lbl1.setText("  VENDORS DETAILS");
+        vendor_lbl1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        vendor_lbl1.setBounds(30, 225, 170, 35);
+        vendorPanel.add(vendor_lbl1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        vendor_btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/menu-left menu selected-x20y170.png"))); // NOI18N
+        vendor_btn1.setText("jLabel18");
+        vendor_btn1.setBounds(20, 215, 180, 55);
+        vendorPanel.add(vendor_btn1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        vendorPanel.setBounds(0, 150, 800, 370);
+        jLayeredPane1.add(vendorPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        machine_lbl1.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        machine_lbl1.setForeground(new java.awt.Color(229, 224, 181));
+        machine_lbl1.setText(" MACHINES DETAILS");
+        machine_lbl1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        machine_lbl1.setBounds(30, 160, 170, 35);
+        machinePanel.add(machine_lbl1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        machine_btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/menu-left menu selected-x20y170.png"))); // NOI18N
+        machine_btn1.setText("jLabel18");
+        machine_btn1.setBounds(20, 150, 180, 55);
+        machinePanel.add(machine_btn1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        machinePanel.setBounds(0, 150, 800, 370);
+        jLayeredPane1.add(machinePanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        factory_lbl1.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        factory_lbl1.setForeground(new java.awt.Color(229, 224, 181));
+        factory_lbl1.setText("FACTORY STATUS");
+        factory_lbl1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        factory_lbl1.setBounds(40, 95, 150, 35);
+        factoryPanel.add(factory_lbl1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        factory_btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/menu-left menu selected-x20y170.png"))); // NOI18N
+        factory_btn1.setText("jLabel18");
+        factory_btn1.setBounds(20, 85, 180, 55);
+        factoryPanel.add(factory_btn1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        budget_lbl.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        budget_lbl.setForeground(new java.awt.Color(61, 56, 39));
+        budget_lbl.setText("initial budget :");
+        budget_lbl.setBounds(250, 0, 170, 40);
+        factoryPanel.add(budget_lbl, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        budget_txt.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        budget_txt.setForeground(new java.awt.Color(61, 56, 39));
+        budget_txt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        budget_txt.setBounds(290, 40, 440, 30);
+        factoryPanel.add(budget_txt, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        hour_lbl.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        hour_lbl.setForeground(new java.awt.Color(61, 56, 39));
+        hour_lbl.setText("work hours :");
+        hour_lbl.setBounds(250, 70, 170, 40);
+        factoryPanel.add(hour_lbl, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        hour_txt.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        hour_txt.setForeground(new java.awt.Color(61, 56, 39));
+        hour_txt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        hour_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hour_txtActionPerformed(evt);
+            }
+        });
+        hour_txt.setBounds(290, 110, 440, 30);
+        factoryPanel.add(hour_txt, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        machines_lbl.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        machines_lbl.setForeground(new java.awt.Color(61, 56, 39));
+        machines_lbl.setText("available machines :");
+        machines_lbl.setBounds(250, 140, 200, 40);
+        factoryPanel.add(machines_lbl, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        machines_txt.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        machines_txt.setForeground(new java.awt.Color(61, 56, 39));
+        machines_txt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        machines_txt.setBounds(290, 180, 440, 30);
+        factoryPanel.add(machines_txt, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        capacity_lbl.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        capacity_lbl.setForeground(new java.awt.Color(61, 56, 39));
+        capacity_lbl.setText("factory capacity :");
+        capacity_lbl.setBounds(250, 210, 170, 40);
+        factoryPanel.add(capacity_lbl, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        capacity_txt.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        capacity_txt.setForeground(new java.awt.Color(61, 56, 39));
+        capacity_txt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        capacity_txt.setBounds(290, 250, 440, 30);
+        factoryPanel.add(capacity_txt, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        transport_lbl.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        transport_lbl.setForeground(new java.awt.Color(61, 56, 39));
+        transport_lbl.setText("available transport :");
+        transport_lbl.setBounds(250, 280, 200, 40);
+        factoryPanel.add(transport_lbl, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        transport_txt.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        transport_txt.setForeground(new java.awt.Color(61, 56, 39));
+        transport_txt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        transport_txt.setBounds(290, 320, 440, 30);
+        factoryPanel.add(transport_txt, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        factoryPanel.setBounds(1, 151, 800, 370);
+        jLayeredPane1.add(factoryPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        recap_lbl1.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        recap_lbl1.setForeground(new java.awt.Color(229, 224, 181));
+        recap_lbl1.setText(" RECAP");
+        recap_lbl1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        recap_lbl1.setBounds(130, 30, 60, 35);
+        recapPanel.add(recap_lbl1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        algorithm_lbl.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        algorithm_lbl.setForeground(new java.awt.Color(61, 56, 39));
+        algorithm_lbl.setText("routing algorithm :");
+        algorithm_lbl.setBounds(250, 170, 170, 40);
+        recapPanel.add(algorithm_lbl, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        input_lbl.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        input_lbl.setForeground(new java.awt.Color(61, 56, 39));
+        input_lbl.setText("input file :");
+        input_lbl.setBounds(250, 60, 90, 30);
+        recapPanel.add(input_lbl, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        algorithm_txt.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        algorithm_txt.setForeground(new java.awt.Color(61, 56, 39));
+        algorithm_txt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        algorithm_txt.setBounds(290, 220, 440, 30);
+        recapPanel.add(algorithm_txt, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        input_txt.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        input_txt.setForeground(new java.awt.Color(61, 56, 39));
+        input_txt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        input_txt.setBounds(290, 100, 440, 30);
+        recapPanel.add(input_txt, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        recap_btn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/menu-left menu selected-x20y170.png"))); // NOI18N
+        recap_btn2.setText("jLabel18");
+        recap_btn2.setBounds(20, 20, 180, 55);
+        recapPanel.add(recap_btn2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        recapPanel.setBounds(0, 150, 800, 370);
+        jLayeredPane1.add(recapPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        product_lbl.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        product_lbl.setForeground(new java.awt.Color(229, 224, 181));
+        product_lbl.setText(" PRODUCTS DETAILS");
+        product_lbl.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        product_lbl.setBounds(25, 440, 170, 35);
+        jLayeredPane1.add(product_lbl, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        vendor_lbl.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        vendor_lbl.setForeground(new java.awt.Color(229, 224, 181));
+        vendor_lbl.setText("  VENDORS DETAILS");
+        vendor_lbl.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        vendor_lbl.setBounds(30, 375, 170, 35);
+        jLayeredPane1.add(vendor_lbl, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        machine_lbl.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        machine_lbl.setForeground(new java.awt.Color(229, 224, 181));
+        machine_lbl.setText(" MACHINES DETAILS");
+        machine_lbl.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        machine_lbl.setBounds(30, 310, 170, 35);
+        jLayeredPane1.add(machine_lbl, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        factory_lbl.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        factory_lbl.setForeground(new java.awt.Color(229, 224, 181));
+        factory_lbl.setText("  FACTORY STATUS");
+        factory_lbl.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        factory_lbl.setBounds(30, 245, 160, 35);
+        jLayeredPane1.add(factory_lbl, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        recap_lbl.setFont(new java.awt.Font("Trebuchet MS", 1, 18));
+        recap_lbl.setForeground(new java.awt.Color(229, 224, 181));
+        recap_lbl.setText(" RECAP");
+        recap_lbl.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        recap_lbl.setBounds(130, 180, 60, 35);
+        jLayeredPane1.add(recap_lbl, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        product_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/menu-left menu-x20y170.png"))); // NOI18N
+        product_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                product_btnMouseClicked(evt);
+            }
+        });
+        product_btn.setBounds(20, 430, 180, 55);
+        jLayeredPane1.add(product_btn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        vendor_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/menu-left menu-x20y170.png"))); // NOI18N
+        vendor_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vendor_btnMouseClicked(evt);
+            }
+        });
+        vendor_btn.setBounds(20, 365, 180, 55);
+        jLayeredPane1.add(vendor_btn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        machine_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/menu-left menu-x20y170.png"))); // NOI18N
+        machine_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                machine_btnMouseClicked(evt);
+            }
+        });
+        machine_btn.setBounds(20, 300, 180, 55);
+        jLayeredPane1.add(machine_btn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        factory_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/menu-left menu-x20y170.png"))); // NOI18N
+        factory_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                factory_btnMouseClicked(evt);
+            }
+        });
+        factory_btn.setBounds(20, 235, 180, 55);
+        jLayeredPane1.add(factory_btn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        recap_btn.setForeground(new java.awt.Color(255, 255, 255));
+        recap_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/menu-left menu-x20y170.png"))); // NOI18N
+        recap_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                recap_btnMouseClicked(evt);
+            }
+        });
+        recap_btn.setBounds(20, 170, 180, 55);
+        jLayeredPane1.add(recap_btn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        back_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/backbtn-x422y530.png"))); // NOI18N
+        back_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                back_btnMouseClicked(evt);
+            }
+        });
+        back_btn.setBounds(400, 530, 175, 50);
+        jLayeredPane1.add(back_btn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        simulation_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/simulationbtn-x603y530.png"))); // NOI18N
+        simulation_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                simulation_btnMouseClicked(evt);
+            }
+        });
+        simulation_btn.setBounds(603, 530, 175, 50);
+        jLayeredPane1.add(simulation_btn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        dialogbox.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/menu-right bg-x200y150.png"))); // NOI18N
+        dialogbox.setBounds(200, 150, 580, 370);
+        jLayeredPane1.add(dialogbox, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        header.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/intro-title-x0y70.png"))); // NOI18N
+        header.setBounds(0, 10, 800, 110);
+        jLayeredPane1.add(header, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factory/ranger/image/main-bg.png"))); // NOI18N
+        jLabel1.setBounds(0, 0, 800, 600);
+        jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void hour_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hour_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hour_txtActionPerformed
+
+    private void recap_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recap_btnMouseClicked
+        try {
+            // TODO add your handling code here:
+            displayRecap(1);
+        } catch (IOException ex) {
+            Logger.getLogger(RecapScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_recap_btnMouseClicked
+
+    private void machine_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_machine_btnMouseClicked
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            displayRecap(3);
+        } catch (IOException ex) {
+            Logger.getLogger(RecapScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_machine_btnMouseClicked
+
+    private void factory_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_factory_btnMouseClicked
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            displayRecap(2);
+        } catch (IOException ex) {
+            Logger.getLogger(RecapScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_factory_btnMouseClicked
+
+    private void vendor_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vendor_btnMouseClicked
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            displayRecap(4);
+        } catch (IOException ex) {
+            Logger.getLogger(RecapScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_vendor_btnMouseClicked
+
+    private void product_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_product_btnMouseClicked
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            displayRecap(5);
+        } catch (IOException ex) {
+            Logger.getLogger(RecapScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_product_btnMouseClicked
+
+    private void back_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_back_btnMouseClicked
+        // TODO add your handling code here:
+        hideRecap();
+        SelectScreen.getSingleton().setVisible(true);
+    }//GEN-LAST:event_back_btnMouseClicked
+
+    private void simulation_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simulation_btnMouseClicked
+        // TODO add your handling code here:
+        hideRecap();
+        try {
+            SimulationScreen.getSingleton().displaySimulation(1);
+        } catch (IOException ex) {
+            Logger.getLogger(RecapScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_simulation_btnMouseClicked
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel algorithm_lbl;
+    private javax.swing.JTextField algorithm_txt;
+    private javax.swing.JLabel back_btn;
+    private javax.swing.JLabel budget_lbl;
+    private javax.swing.JTextField budget_txt;
+    private javax.swing.JLabel capacity_lbl;
+    private javax.swing.JTextField capacity_txt;
+    private javax.swing.JLabel dialogbox;
+    private javax.swing.JLayeredPane factoryPanel;
+    private javax.swing.JLabel factory_btn;
+    private javax.swing.JLabel factory_btn1;
+    private javax.swing.JLabel factory_lbl;
+    private javax.swing.JLabel factory_lbl1;
+    private javax.swing.JLabel header;
+    private javax.swing.JLabel hour_lbl;
+    private javax.swing.JTextField hour_txt;
+    private javax.swing.JLabel input_lbl;
+    private javax.swing.JTextField input_txt;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLayeredPane machinePanel;
+    private javax.swing.JLabel machine_btn;
+    private javax.swing.JLabel machine_btn1;
+    private javax.swing.JLabel machine_lbl;
+    private javax.swing.JLabel machine_lbl1;
+    private javax.swing.JLabel machines_lbl;
+    private javax.swing.JTextField machines_txt;
+    private javax.swing.JLayeredPane productPanel;
+    private javax.swing.JLabel product_btn;
+    private javax.swing.JLabel product_btn1;
+    private javax.swing.JLabel product_lbl;
+    private javax.swing.JLabel product_lbl1;
+    private javax.swing.JLayeredPane recapPanel;
+    private javax.swing.JLabel recap_btn;
+    private javax.swing.JLabel recap_btn2;
+    private javax.swing.JLabel recap_lbl;
+    private javax.swing.JLabel recap_lbl1;
+    private javax.swing.JLabel simulation_btn;
+    private javax.swing.JLabel transport_lbl;
+    private javax.swing.JTextField transport_txt;
+    private javax.swing.JLayeredPane vendorPanel;
+    private javax.swing.JLabel vendor_btn;
+    private javax.swing.JLabel vendor_btn1;
+    private javax.swing.JLabel vendor_lbl;
+    private javax.swing.JLabel vendor_lbl1;
+    // End of variables declaration//GEN-END:variables
+}
